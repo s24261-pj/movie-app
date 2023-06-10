@@ -1,18 +1,28 @@
 package com.example.demo.movie.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "movie")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Movie id")
     private long id;
+    @NotBlank
+    @Size(min = 1, max = 255)
+    @Schema(description = "Movie name")
     private String name;
     @Enumerated(EnumType.STRING)
+    @NotBlank
+    @Schema(description = "Movie category")
     private Category category;
 
     @Column(name = "is_available")
+    @Schema(description = "Movie available")
     private boolean isAvailable = false;
 
     public Movie(long id, String name, Category category, boolean isAvailable) {
